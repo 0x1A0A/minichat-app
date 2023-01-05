@@ -21,13 +21,7 @@ pub struct Messages {
     pub date: DateTime,
 }
 
-#[derive(Debug, Deserialize, Clone)]
-#[serde(crate = "rocket::serde")]
-pub struct MessagesRoomPayload {
-    pub room: String,
-}
-
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(crate = "rocket::serde")]
 pub struct MessagesPayload {
     pub msg: String,

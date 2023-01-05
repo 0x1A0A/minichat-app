@@ -1,42 +1,9 @@
 use crate::models::user;
 
-// use mongodb::bson::oid::ObjectId;
-// use mongodb::options::FindOneAndUpdateOptions;
-// use mongodb::options::FindOptions;
-// use mongodb::options::ReturnDocument;
 use mongodb::{
     bson::{doc, Document},
     Client,
 };
-
-//use rocket::futures::TryStreamExt;
-// use rocket::serde::json::Json;
-
-// pub async fn find_users(db: &Client) -> mongodb::error::Result<Vec<user::Users>> {
-// 	let database = db.database("chatapp");
-// 	let collection = database.collection::<user::UsersDoc>("users");
-
-//     // let find_options = FindOptions::builder()
-//     //     .limit(limit)
-//     //     .skip(u64::try_from((page - 1) * limit).unwrap())
-//     //     .build();
-
-//     let mut cursor = collection.find(None, None).await?;
-
-//     let mut customers: Vec<user::Users> = vec![];
-//     while let Some(result) = cursor.try_next().await? {
-//         let _id = result._id;
-//         let name = result.name;
-//         // transform ObjectId to String
-//         let customer_json = user::Users {
-//             _id: _id.to_string(),
-//             name: name.to_string(),
-//         };
-//         customers.push(customer_json);
-//     }
-
-//     Ok(customers)
-// }
 
 pub async fn find_user(db: &Client, name: String) -> mongodb::error::Result<Option<user::Users>> {
     let database = db.database("chatapp");

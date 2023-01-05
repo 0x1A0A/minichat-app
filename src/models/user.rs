@@ -17,6 +17,6 @@ pub struct Users {
 
 #[derive(Debug, Deserialize)]
 #[serde(crate = "rocket::serde")]
-pub struct UsersPayload {
+pub struct UserPayload {
     pub name: String,
 }

@@ -15,11 +15,6 @@ pub async fn find_messages_in_room(
     let database = db.database("chatapp");
     let collection = database.collection::<models::message::MessagesView>("messageView");
 
-    // let find_options = FindOptions::builder()
-    //     .limit(limit)
-    //     .skip(u64::try_from((page - 1) * limit).unwrap())
-    //     .build();
-
     let mut cursor = collection.find(doc! {"room":room_name}, None).await?;
 
     while let Some(result) = cursor.try_next().await? {
@@ -37,17 +32,22 @@ pub async fn find_messages_in_room(
 
 pub async fn insert_message(
     db: &Client,
-	msg: String,
+    msg: String,
     uid: ObjectId,
     rid: ObjectId,
 ) -> error::Result<String> {
     let collection = db.database("chatapp").collection::<Document>("messages");
-    let res = collection.insert_one(doc! {
-		"msg" : msg,
-		"user": uid,
-		"room": rid,
-		"date": DateTime::now(),
-	}, None).await?;
+    let res = collection
+        .insert_one(
+            doc! {
+                "msg" : msg,
+                "user": uid,
+                "room": rid,
+                "date": DateTime::now(),
+            },
+            None,
+        )
+        .await?;
 
-	Ok(res.inserted_id.to_string())
+    Ok(res.inserted_id.to_string())
 }

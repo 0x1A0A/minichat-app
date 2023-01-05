@@ -1,9 +1,5 @@
 use crate::models::room;
 
-// use mongodb::bson::oid::ObjectId;
-// use mongodb::options::FindOneAndUpdateOptions;
-// use mongodb::options::FindOptions;
-// use mongodb::options::ReturnDocument;
 use mongodb::{
     bson::{doc, Document},
     Client,
