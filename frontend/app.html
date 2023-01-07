@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta width="device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Connect</title>
+	</head>
+	<body>
+		<div class="login">
+			<div class="login-form">
+				<div>Username</div>
+				<input type="text" id="input-username" />
+			</div>
+		</div>
+		<div class="main fadeout">
+			<div class="hide-username">default</div>
+			<div class="room-input-container">
+				<p>new room</p>
+				<input type="text" class="room-input-hide" />
+			</div>
+			<div class="room-list-container">
+				<div class="rooms-list">
+					<template>
+						<div class="room">
+							<div class="room-bg"></div>
+							<p class="room-label">Name</p>
+						</div>
+					</template>
+				</div>
+			</div>
+			<div class="message-container"></div>
+		</div>
+	</body>
+	<script src="script.js"></script>
+</html>
