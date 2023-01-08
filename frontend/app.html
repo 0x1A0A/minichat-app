@@ -22,16 +22,28 @@
 				<input type="text" class="room-input-hide" />
 			</div>
 			<div class="room-list-container">
-				<div class="rooms-list">
-					<template>
-						<div class="room">
-							<div class="room-bg"></div>
-							<p class="room-label">Name</p>
-						</div>
-					</template>
-				</div>
+				<template>
+					<div class="room">
+						<div class="room-bg"></div>
+						<p class="room-label">Name</p>
+					</div>
+				</template>
+				<div class="rooms-list"></div>
 			</div>
-			<div class="message-container"></div>
+			<div class="message-container">
+				<template>
+					<div class="msg">
+						<div class="msg-from">USER A</div>
+						<div class="msg-string">MSG A</div>
+					</div>
+				</template>
+				<div class="msg-list"></div>
+			</div>
+			<div class="message-input-container">
+				<div class="message-label">message</div>
+				<textarea class="message-input" rows="1"> </textarea>
+				<div class="message-send-icon">></div>
+			</div>
 		</div>
 	</body>
 	<script src="script.js"></script>

@@ -20,7 +20,7 @@ body {
 	justify-content: center;
 }
 
-.login-form > div{
+.login-form > div {
 	color: black;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -114,15 +114,6 @@ body {
 	top: 80px;
 }
 
-.message-container {
-	position: fixed;
-	width: 75%;
-	height: 80vh;
-	border: solid white 1px;
-	left: 21%;
-	top: 80px;
-}
-
 .rooms-list {
 	display: flex;
 	flex-direction: column;
@@ -161,6 +152,84 @@ body {
 	align-self: flex-start;
 	font-weight: bold;
 	transition: background-color 0.2s, color 0.2s, width 0.16s, align-self 7s;
+}
+
+.message-input-container {
+	border: solid white 1px;
+	height: 3ch;
+	position: fixed;
+	width: 75%;
+	left: 21%;
+	bottom: 12px;
+	padding: 2px 8px;
+	color: white;
+	display: grid;
+	grid-template-columns: 10% 88% auto;
+}
+
+.message-input-container > * {
+	text-align: center;
+}
+
+.message-input {
+	padding: 2px;
+	resize: none;
+	outline: none;
+	border: none;
+	text-align: left;
+}
+
+.message-send-icon {
+	transition: font 0.05s, padding 0.07s;
+}
+
+.message-send-icon:hover {
+	font-weight: bold;
+	padding: 0px 10px;
+	cursor: pointer;
+	transition: font 0.16s, padding 0.2s;
+	user-select: none;
+}
+
+.message-container {
+	position: fixed;
+	width: 75%;
+	height: 80vh;
+	border: solid white 1px;
+	display: flex;
+	flex-direction: column;
+	padding: 0px;
+	left: 21%;
+	top: 80px;
+}
+
+.msg {
+	padding: 6px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	/* border: solid green 1px; */
+}
+
+.msg .msg-from {
+	font-size: 80%;
+	color: white;
+}
+
+.msg .msg-string {
+	color: white;
+	padding-left: 1%;
+	padding-right: 10%;
+}
+
+.sender {
+	align-items: flex-end;
+}
+
+.sender .msg-string {
+	align-items: flex-end;
+	padding-left: 10%;
+	padding-right: 1%;
 }
 
 .fadeout {

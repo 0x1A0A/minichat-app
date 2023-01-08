@@ -19,17 +19,17 @@ use crate::{db, models, response};
 
 type ResError = status::Custom<Json<response::ErrorReason>>;
 
-#[get("/messages", data = "<payload>")]
+#[get("/messages/<name>")]
 pub async fn get_messages_by_room(
     db: &State<Client>,
-    payload: Json<models::room::RoomPayload>,
+    name: String,
 ) -> Result<Json<Vec<models::message::Messages>>, ResError> {
-    match db::message::find_messages_in_room(db, payload.name.clone()).await {
+    match db::message::find_messages_in_room(db, name.clone()).await {
         Ok(ok) => Ok(Json(ok)),
         Err(_) => Err(status::Custom(
             Status::BadRequest,
             Json(response::ErrorReason {
-                reason: format!("Some Error 'room={}'", payload.name),
+                reason: format!("Some Error 'room={}'", name),
             }),
         )),
     }

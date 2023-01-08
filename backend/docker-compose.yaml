@@ -1,4 +1,8 @@
 services:
+  # server_api:
+  #   build: .
+  #   ports: 
+  #     - "8000:8000"
   db:
     image: mongo
     ports:
