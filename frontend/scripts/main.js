@@ -38,6 +38,8 @@ function main() {
 	let message_send = document.querySelector(".message-send-icon");
 
 	const send_message = () => {
+		if (!app.username || !app.room.current) return;
+
 		let val = message_input.value;
 		val = val.trim();
 
