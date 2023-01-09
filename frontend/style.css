@@ -201,6 +201,7 @@ body {
 	padding: 0px;
 	left: 21%;
 	top: 80px;
+	overflow: scroll;
 }
 
 .msg {
@@ -220,6 +221,10 @@ body {
 	color: white;
 	padding-left: 1%;
 	padding-right: 10%;
+}
+
+.msg-list {
+	margin-right: 5px;
 }
 
 .sender {

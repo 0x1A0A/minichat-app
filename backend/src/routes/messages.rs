@@ -102,10 +102,10 @@ pub async fn post_message(
     }
 }
 
-#[get("/message-stream", data = "<payload>")]
+#[get("/message-stream/<room>")]
 pub async fn message_event(
     queue: &State<Sender<models::message::MessagesPayload>>,
-    payload: Json<models::room::RoomPayload>,
+    room: String,
     mut end: Shutdown,
 ) -> EventStream![] {
     let mut rx = queue.subscribe();
@@ -119,7 +119,7 @@ pub async fn message_event(
                 },
                 _ = &mut end => break,
             };
-            if payload.name == msg.room {
+            if room == msg.room {
         		yield Event::json(&msg);
             }
         }
