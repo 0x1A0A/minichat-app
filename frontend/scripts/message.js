@@ -55,7 +55,11 @@ const render_message = function (msg) {
 
 	// if this is user message add sender class so the message go to the right side
 	if (msg.sender) child.classList.toggle("sender");
-	if (prev_message && prev_message.user === msg.user) from.remove();
+	if (prev_message) {
+		if (prev_message.getAttribute("owner") === msg.user) from.remove();
+	}
+
+	child.setAttribute("owner", msg.user);
 
 	// for now scroll to the very bottom of the view
 	let container = document.querySelector(".message-container");
