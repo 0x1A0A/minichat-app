@@ -77,7 +77,7 @@ const add_message = function (msg) {
 };
 
 // load message from the message list
-const load_msg = function (roomname) {
+const load_messages = function (roomname) {
 	// clear old messages
 	message.list.innerHTML = "";
 	// render all messages from the list for current room

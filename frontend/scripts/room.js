@@ -18,7 +18,7 @@ const select_room = function (roomname) {
 	// change current room to room we are switching to
 	app.room.current = roomname;
 	// load new message to the message list
-	load_msg(roomname);
+	load_messages(roomname);
 };
 
 // add new room to the room list
