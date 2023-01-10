@@ -30,8 +30,8 @@ const create_room_menu = async function (roomname) {
 	app.room.list.add(roomname);
 
 	// get the template and add to the element room list
-	let parent = document.querySelector(".rooms-list");
-	let template = document.querySelector(".room-list-container template");
+	let parent = document.querySelector(".room-list");
+	let template = document.querySelector(".rooms>template");
 	let elm = template.content.cloneNode(true);
 	parent.appendChild(elm);
 

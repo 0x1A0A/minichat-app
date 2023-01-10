@@ -62,7 +62,7 @@ const render_message = function (msg) {
 	child.setAttribute("owner", msg.user);
 
 	// for now scroll to the very bottom of the view
-	let container = document.querySelector(".message-container");
+	let container = document.querySelector(".messages");
 	container.scrollTop = container.scrollHeight;
 };
 

@@ -1,0 +1,26 @@
+.login {
+	z-index: 1;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-form > div {
+	color: black;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.login-form > input {
+	font-size: 18px;
+	margin-left: 20px;
+	padding: 2px 8px;
+	color: white;
+	background-color: black;
+	outline: none;
+	border: none;
+}

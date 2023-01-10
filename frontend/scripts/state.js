@@ -28,10 +28,10 @@ const app = {
 
 // message list and template for easy access
 const message = {
-	template: document.querySelector(".message-container>template"),
-	list: document.querySelector(".msg-list"),
+	template: document.querySelector(".messages>template"),
+	list: document.querySelector(".message-list"),
 	// hopefully the code look cleanner
 	last_child: function () {
-		return this.list.querySelector(".msg:last-child");
+		return this.list.querySelector(".message:last-child");
 	},
 };

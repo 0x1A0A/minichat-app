@@ -1,0 +1,91 @@
+.right-panel {
+	padding: 10px 20px 10px 1px;
+	display: grid;
+	grid-template-rows: 64px 64px auto 5ch;
+	grid-template-columns: auto;
+	row-gap: 5px;
+}
+
+.right-panel > div:first-child {
+	grid-column: 1/2;
+	grid-row: 1/3;
+	visibility: hidden;
+}
+
+.messages {
+	overflow: auto;
+	padding-right: 20px;
+	border: solid white 1px;
+	border-radius: 0.4em;
+	color: white;
+}
+
+.message-list {
+	margin: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.message {
+	align-self: flex-start;
+	padding: 4px;
+	margin-right: 50px;
+}
+
+.message-owner {
+	font-size: 80%;
+	text-decoration: underline;
+}
+
+.message-value {
+	padding-left: 20px;
+	padding-right: 8px;
+}
+
+.sender {
+	margin-right: 0px;
+	margin-left: 50px;
+	align-self: flex-end;
+}
+
+.sender > div {
+	text-align: end;
+}
+
+.sender > .message-value {
+	padding-left: 8px;
+	padding-right: 20px;
+}
+
+.message-input {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	padding-bottom: 8px;
+	padding-right: 30px;
+}
+
+.message-input > .container {
+	background-color: white;
+	padding: 4px 10px;
+	border-radius: 20px;
+	display: flex;
+}
+
+.message-input textarea {
+	resize: none;
+	outline: none;
+	border: none;
+	width: 120px;
+	text-overflow: clip;
+	transition: width 0.12s, height 0.12s;
+	word-break: break-all;
+}
+
+.message-input textarea:focus {
+	resize: none;
+	outline: none;
+	border: none;
+	width: 200px;
+	transition: width 0.2s, height 0.2s;
+}

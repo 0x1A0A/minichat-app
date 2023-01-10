@@ -1,0 +1,95 @@
+.left-panel {
+	padding: 10px 1px 10px 20px;
+	display: grid;
+	grid-template-rows: 64px 64px auto;
+	grid-template-columns: auto;
+	row-gap: 5px;
+}
+
+.username-container,
+.room-input-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding: 10px;
+}
+
+.username {
+	background-color: white;
+	padding: 0.5rem;
+	border-radius: 2rem;
+	color: black;
+	position: relative;
+	bottom: -30px;
+	font-weight: bold;
+}
+
+.room-input {
+	display: flex;
+	padding: 4px 10px;
+	border-radius: 2rem;
+	background-color: white;
+}
+
+.room-input > input {
+	width: 5rem;
+	transition: width 0.12s;
+	border: none;
+	outline: none;
+	text-align: end;
+}
+
+.room-input > input:focus {
+	width: 12rem;
+	transition: width 0.2s;
+}
+
+.rooms {
+	overflow: scroll;
+}
+
+.room-list {
+	align-items: flex-end;
+	display: flex;
+	flex-direction: column;
+	padding-right: 20px;
+	row-gap: 4px;
+	margin: 5px;
+	border-right: solid whitesmoke 2px;
+}
+
+.room {
+	border: solid white 1px;
+	color: white;
+	display: flex;
+	flex-shrink: 0;
+	height: 4ch;
+	width: 120px;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0 10px;
+	transition: font-size 0.12s, margin 0.12s;
+}
+
+.room:hover {
+	background-color: white;
+	color: black;
+	margin-right: 10px;
+}
+
+.room-selected {
+	background-color: white;
+	color: black;
+	width: 100%;
+}
+
+.room-selected:hover {
+	margin-right: 0;
+	font-size: 120%;
+	transition: font-size 0.2s;
+}
+
+.room-selected > .room-label {
+	margin-right: auto;
+	transition: margin 0.2s;
+}

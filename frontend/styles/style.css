@@ -1,0 +1,29 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	background-color: black;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 320px auto;
+	grid-template-rows: 100vh;
+}
+
+.fadeout {
+	opacity: 0;
+	transition: opacity 0.2s;
+	pointer-events: none;
+}
+
+.fadein {
+	opacity: 1;
+	transition: opacity 0.2s;
+	pointer-events: all;
+}
