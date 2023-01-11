@@ -22,7 +22,7 @@ const app = {
 	// backend server and port
 	// don't actually have specific reason to keep it here
 	// just when we change server we don't need to hunt down the whole project
-	server: "localhost",
+	server: "10.1.5.149",
 	port: 8000,
 };
 

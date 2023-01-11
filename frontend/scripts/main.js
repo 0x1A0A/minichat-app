@@ -3,7 +3,7 @@
 function main() {
 	let username_form = document.querySelector("#input-username");
 
-	username_form.addEventListener("keyup", (event) => {
+	username_form.addEventListener("keydown", (event) => {
 		if (event.key === "Enter" && username_form.value) {
 			document.querySelector(".login").classList.toggle("fadeout");
 			let username_input = document.querySelector(".username");

@@ -22,10 +22,10 @@ pub fn init() -> AdHoc {
 async fn connect() -> mongodb::error::Result<Client> {
     dotenv().ok();
 
-    let mongo_server = env::var("SERVER").expect("SERVER is not found.");
-    let name = env::var("NAME").expect("NAME is not found.");
-    let passwd = env::var("PASSWD").expect("PASSWD not found.");
-    let mongo_port = env::var("PORT").expect("PORT not found.");
+    let mongo_server = env::var("DB_SERVER").expect("SERVER is not found.");
+    let name = env::var("DB_USER").expect("NAME is not found.");
+    let passwd = env::var("DB_PASSWD").expect("PASSWD not found.");
+    let mongo_port = env::var("DB_PORT").expect("PORT not found.");
 
     let uri = format!("mongodb://{name}:{passwd}@{mongo_server}:{mongo_port}");
 

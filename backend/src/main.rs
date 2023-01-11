@@ -40,6 +40,7 @@ impl Fairing for CORS {
 
 #[launch]
 fn rocket() -> _ {
+
     rocket::build()
         .manage(channel::<models::message::MessagesPayload>(512).0)
         .attach(db::init())

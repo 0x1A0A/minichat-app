@@ -1,0 +1,11 @@
+@media only screen and (max-width: 800px) {
+	.grid-container {
+		display: grid;
+		grid-template-rows: 120px auto;
+		grid-template-columns: 100vw;
+	}
+
+	.grid-container > div {
+		border: solid red 1px;
+	}
+}

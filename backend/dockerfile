@@ -1,0 +1,5 @@
+FROM debian:sid-slim
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
+COPY /target/release/chat-app /usr/local/bin/chat-app
+EXPOSE 8000
+CMD ["chat-app"]

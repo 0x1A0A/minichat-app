@@ -2,5 +2,5 @@
 /backend/.env
 /backend/.db
 /backend/.dockerignore
-/backend/dockerfile
 /design
+/frontend/node_modules
