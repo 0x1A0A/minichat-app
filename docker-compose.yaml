@@ -1,6 +1,11 @@
 services:
-  server_api:
-    build: .
+  app:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+
+  server:
+    build: ./backend
     ports: 
       - "8000:8000"
     environment:
@@ -9,6 +14,7 @@ services:
       DB_USER: mongo
       DB_PASSWD: passwd
       DB_PORT: 27017 
+  
   db:
     image: mongo
     ports:
@@ -18,4 +24,4 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mongo
       MONGO_INITDB_ROOT_PASSWORD: passwd
     volumes:
-      - .db/data/db:/data/db
+      - ./backend/.db/data/db:/data/db
