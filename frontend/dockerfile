@@ -1,6 +1,8 @@
 FROM node:slim
 WORKDIR /home/app/
 COPY . .
+ENV BACKEND_SERVER="10.1.5.149"
+RUN sed -i "/server/ s/0.0.0.0/${BACKEND_SERVER}/" ./scripts/state.js
 EXPOSE 3000
 RUN ["npm", "ci"]
 CMD ["node", "server.js"]
