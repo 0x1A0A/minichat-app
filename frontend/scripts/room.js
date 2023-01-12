@@ -26,34 +26,29 @@ const create_room_menu = async function (roomname) {
 	// prevent user from add the same name again
 	if (app.room.list.has(roomname)) return;
 
-	// add new room to the list for future reference
-	app.room.list.add(roomname);
-
-	// get the template and add to the element room list
-	let parent = document.querySelector(".room-list");
-	let template = document.querySelector(".rooms>template");
-	let elm = template.content.cloneNode(true);
-	parent.appendChild(elm);
-
-	// get newly added element for config
-	let addedChild = parent.querySelector(".room:last-child");
-	addedChild.querySelector("p").innerText = roomname;
-	addedChild.addEventListener("click", () => select_room(roomname));
-
-	// create new object for the room
-	app.room.element[roomname] = {
-		// dom element for future reference
-		elm: addedChild,
-		// list off the all message
-		msg: new Array(),
-	};
-
-	// subscribe to server with the room name
-	get_event_source(roomname);
-
 	// load all message in the room from server
-	get_messages(roomname).then(() => {
-		// we select first room that has been added to be selected by default
-		if (!app.room.current) select_room(roomname);
+	get_messages(roomname).then((ok) => {
+		if (ok) {
+			// add new room to the list for future reference
+			app.room.list.add(roomname);
+
+			// get the template and add to the element room list
+			let parent = document.querySelector(".room-list");
+			let template = document.querySelector(".rooms>template");
+			let elm = template.content.cloneNode(true);
+			parent.appendChild(elm);
+
+			// get newly added element for config
+			let addedChild = parent.lastElementChild;
+			addedChild.querySelector("p").innerText = roomname;
+			addedChild.addEventListener("click", () => select_room(roomname));
+
+			// add added element to object for easy access
+			app.room.element[roomname].elm = addedChild;
+			// subscribe to server with the room name
+			get_event_source(roomname);
+			// we select first room that has been added to be selected by default
+			if (!app.room.current) select_room(roomname);
+		}
 	});
 };

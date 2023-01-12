@@ -11,14 +11,23 @@ const get_messages = async function (roomname) {
 		header: { "Content-Type": "application/json" },
 	};
 
-	await fetch(apiUrl, requestOption)
-		.then((response) => response.json())
+	return fetch(apiUrl, requestOption)
+		.then((response) => {
+			if (response.ok) return response.json();
+			else return undefined;
+		})
 		.then((res) => {
-			// itterate trought the response list and store it to our own list
-			res.forEach((element) => {
-				element.sender = app.username == element.user;
-				app.room.element[roomname].msg.push(element);
-			});
+			if (res) {
+				app.room.element[roomname] = {
+					msg : new Array(),
+				};
+				res.forEach((element) => {
+					element.sender = app.username == element.user;
+					app.room.element[roomname].msg.push(element);
+				});
+				return true;
+			}
+			return false;
 		});
 };
 
@@ -32,22 +41,20 @@ const post_message = async function (msg) {
 		body: JSON.stringify(msg),
 	};
 
-	await fetch(apiUrl, requestOption).then((response) =>
-		console.log(response.ok ? "Success" : "failure")
-	);
+	await fetch(apiUrl, requestOption);
 };
 
 // render message to the site
 const render_message = function (msg) {
 	// the latest message in the list
-	let prev_message = message.last_child();
+	const prev_message = message.list.lastElementChild;
 
 	// get the elment template add append to the list
 	let elm = message.template.content.cloneNode(true);
 	message.list.appendChild(elm);
 
 	// get the element that recently added
-	let child = message.last_child();
+	const child = message.list.lastElementChild;
 
 	// edit message
 	let [from, new_message] = child.querySelectorAll("*");

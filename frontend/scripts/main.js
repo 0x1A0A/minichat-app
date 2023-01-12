@@ -13,19 +13,7 @@ function main() {
 		}
 	});
 
-	// let new_room_container = document.querySelector(".room-input-container");
-	// let new_room_p = new_room_container.querySelector("p");
 	let new_room_input = document.querySelector(".room-input>input");
-
-	// new_room_p.addEventListener("click", () => {
-	// 	if (new_room_input.classList.toggle("room-input-show")) {
-	// 		new_room_input.focus();
-	// 	}
-	// });
-
-	// new_room_input.addEventListener("focusout", () => {
-	// 	new_room_input.classList.toggle("room-input-show");
-	// });
 
 	new_room_input.addEventListener("keyup", (event) => {
 		if (event.key === "Enter" && new_room_input.value) {
@@ -35,7 +23,6 @@ function main() {
 	});
 
 	let message_input = document.querySelector(".message-input textarea");
-	//let message_send = document.querySelector(".message-send-icon");
 
 	const send_message = () => {
 		if (!app.username || !app.room.current) return;
@@ -61,9 +48,6 @@ function main() {
 		}
 	});
 
-	// message_send.addEventListener("click", () => {
-	// 	send_message();
-	// });
 }
 
 main();
