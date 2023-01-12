@@ -2,7 +2,7 @@ use crate::models;
 use rocket::futures::TryStreamExt;
 
 use mongodb::{
-    bson::{doc, oid::ObjectId, DateTime, Document},
+    bson::{self, doc, oid::ObjectId, DateTime, Document},
     error, Client,
 };
 
@@ -13,11 +13,42 @@ pub async fn find_messages_in_room(
     let mut res = Vec::new();
 
     let database = db.database("chatapp");
-    let collection = database.collection::<models::message::MessagesView>("messageView");
 
-    let mut cursor = collection.find(doc! {"room":room_name}, None).await?;
+    let room_look_up = doc! { "$lookup": {
+    "from": "rooms",
+    "localField": "room",
+    "foreignField": "_id",
+    "as": "roomDoc" } };
+
+    let user_look_up = doc! { "$lookup": {
+    "from": "users",
+    "localField": "user",
+    "foreignField": "_id",
+    "as": "userDoc" } };
+
+    let project = doc! { "$project":{
+    "_id": 1,
+    "msg": 1,
+    "user": "$userDoc.name",
+    "room": "$roomDoc.name",
+    "date": 1 } };
+
+    let pipeline = vec![
+        room_look_up,
+        doc! { "$unwind": "$roomDoc" },
+        user_look_up,
+        doc! { "$unwind": "$userDoc" },
+        doc! { "$match": { "roomDoc.name": room_name.clone() }},
+        project,
+    ];
+
+    let mut cursor = database
+        .collection::<Document>("messages")
+        .aggregate(pipeline, None)
+        .await?;
 
     while let Some(result) = cursor.try_next().await? {
+        let result: models::message::MessagesView = bson::from_document(result)?;
         res.push(models::message::Messages {
             _id: result._id.to_string(),
             user: result.user,

@@ -24,4 +24,4 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mongo
       MONGO_INITDB_ROOT_PASSWORD: passwd
     volumes:
-      - ./backend/.db/data/db:/data/db
+      - ./backend/.db/:/data/db
