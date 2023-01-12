@@ -5,27 +5,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<link rel="stylesheet" href="styles/style.css" />
-		<link rel="stylesheet" href="styles/login.css" />
-		<link rel="stylesheet" href="styles/left-panel.css" />
-		<link rel="stylesheet" href="styles/right-panel.css" />
-		<link rel="stylesheet" href="styles/mobile.css" />
 		<title>Connect</title>
+		<link rel="stylesheet" href="styles/style.css" />
 	</head>
 	<body>
-		<div class="login">
-			<div class="login-form">
-				<div>Username</div>
-				<input type="text" id="input-username" />
-			</div>
-		</div>
-		<main class="grid-container fadeout">
-			<div class="left-panel">
-				<div class="username-container">
-					<div class="username">
-						<p>"Default NAME"</p>
-					</div>
-				</div>
+		<div class="grid-wrapper">
+			<nav>
 				<div class="room-input-container">
 					<div class="room-input">
 						<input type="text" placeholder="new room" />
@@ -38,30 +23,88 @@
 						</div>
 					</template>
 					<div class="room-list">
-					</div>
-				</div>
-			</div>
-			<div class="right-panel">
-				<div></div>
-				<div class="messages">
-					<template>
-						<div class="message">
-							<div class="message-owner">USER A</div>
-							<div class="message-value">MSG A</div>
+						<div class="room">
+							<p class="room-label">Name</p>
 						</div>
-					</template>
-					<div class="message-list"></div>
+						<div class="room">
+							<p class="room-label">Name</p>
+						</div>
+						<div class="room room-selected">
+							<p class="room-label">Name</p>
+						</div>
+						<div class="room">
+							<p class="room-label">Name</p>
+						</div>
+						<div class="room">
+							<p class="room-label">Name</p>
+						</div>
+					</div>
 				</div>
-				<div class="message-input">
-					<div class="container">
-						<textarea rows="1"></textarea>
+			</nav>
+			<div class="topbar">
+				<button><p>></p></button>
+				<p class="appname">_APPNAME</p>
+				<p class="username">username</p>
+			</div>
+			<div class="current-room"><p>Room-name</p></div>
+			<div class="messages">
+				<template>
+					<div class="message" same-owner="false">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">MSG A</p>
+					</div>
+				</template>
+				<div class="message-list">
+					<div class="message" same-owner="false">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">MSG A</p>
+					</div>
+					<div class="message sender" same-owner="false">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">
+							Paragraphs are the building blocks of papers. Many
+							students define paragraphs in terms of length: a
+							paragraph is a group of at least five sentences, a
+							paragraph is half a page long, etc. In reality,
+							though, the unity and coherence of ideas among
+							sentences is what constitutes a paragraph. A
+							paragraph is defined as “a group of sentences or a
+							single sentence that forms a unit” (Lunsford and
+							Connors 116). Length and appearance do not determine
+							whether a section in a paper is a paragraph. For
+							instance, in some styles of writing, particularly
+							journalistic styles, a paragraph can be just one
+							sentence long. Ultimately, a paragraph is a sentence
+							or group of sentences that support one main idea. In
+							this handout, we will refer to this as the
+							“controlling idea,” because it controls what happens
+							in the rest of the paragraph.
+						</p>
+					</div>
+					<div class="message" same-owner="false">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">MSG A</p>
+					</div>
+					<div class="message" same-owner="true">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">MSG A</p>
+					</div>
+					<div class="message" same-owner="true">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">MSG A</p>
+					</div>
+					<div class="message" same-owner="false">
+						<p class="message-owner">USER A</p>
+						<p class="message-value">MSG A</p>
 					</div>
 				</div>
 			</div>
-		</main>
+			<div class="message-input">
+				<div class="message-input-container">
+					<textarea rows="1" placeholder="message"></textarea>
+					<button></button>
+				</div>
+			</div>
+		</div>
 	</body>
-	<script src="scripts/state.js"></script>
-	<script src="scripts/message.js"></script>
-	<script src="scripts/room.js"></script>
-	<script src="scripts/main.js"></script>
 </html>
