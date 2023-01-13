@@ -1,0 +1,184 @@
+#mongodb
+#pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-chatapp-data-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /data/mongodb
+---
+#pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+#mongbdb
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb-chatapp
+  name: mongodb-chatapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-chatapp
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mongodb-chatapp
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        args: ["--dbpath","/data/db"]
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-creds
+              key: username
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-creds
+              key: password
+        volumeMounts:
+        - name: "mongo-data-dir"
+          mountPath: "/data/db"
+      volumes:
+      - name: "mongo-data-dir"
+        persistentVolumeClaim:
+          claimName: "mongodb-data"
+---
+#db service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mongodb-chatapp
+  name: mongo-port-service
+spec:
+  ports:
+  - port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: mongodb-chatapp
+---
+#secret for db
+apiVersion: v1
+data:
+  password: bW9uZ28= #mongo
+  username: cGFzc3dk #passwd
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: mongo-creds
+---
+#backend
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rocket-server
+  name: rocket-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rocket-server
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: rocket-server 
+    spec:
+      containers:
+        - env:
+            - name: DB_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: password
+            - name: DB_PORT
+              value: "27017"
+            - name: DB_SERVER
+              value: mongo-port-service
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: username
+            - name: ROCKET_ADDRESS
+              value: 0.0.0.0
+          image: 0x1a0a/chat-app
+          name: rocket-server
+---
+#backend services
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rocket-server
+  name: rocket-server
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30000
+  selector:
+    app: rocket-server
+  type: NodePort
+---
+#frontend
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chat-app
+  name: chat-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: chat-app
+    spec:
+      containers:
+      - image: 0x1a0a/chat-app-frontend
+        name: chat-app
+---
+#frontend services
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: chat-app
+  name: chat-app
+spec:
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30080
+  selector:
+    app: chat-app
+  type: NodePort
