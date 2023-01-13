@@ -5,12 +5,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>Connect</title>
+		<title>_FREETEXT</title>
 		<link rel="stylesheet" href="styles/style.css" />
 	</head>
 	<body>
 		<div class="grid-wrapper">
-			<nav>
+			<nav open="false">
 				<div class="room-input-container">
 					<div class="room-input">
 						<input type="text" placeholder="new room" />
@@ -42,9 +42,9 @@
 				</div>
 			</nav>
 			<div class="topbar">
-				<button><p>></p></button>
-				<p class="appname">_APPNAME</p>
-				<p class="username">username</p>
+				<button class="navbar-toggle"><p>>></p></button>
+				<p class="appname">_FREETEXT</p>
+				<p class="username">_usernamehere_</p>
 			</div>
 			<div class="current-room"><p>Room-name</p></div>
 			<div class="messages">
@@ -102,7 +102,7 @@
 			<div class="message-input">
 				<div class="message-input-container">
 					<textarea rows="1" placeholder="message"></textarea>
-					<button></button>
+					<button class="message-send">=></button>
 				</div>
 			</div>
 		</div>

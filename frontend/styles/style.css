@@ -1,3 +1,12 @@
+:root {
+	--c_primary: #29a19c;
+	--c_secondary: #a3f7bf;
+	--c_darkest: #191a19;
+	--c_darker: #272b32;
+	--c_dark: #435055;
+	--c_text: whitesmoke;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -9,7 +18,130 @@
 body {
 	width: 100vw;
 	height: 100vh;
+	color: var(--c_text);
+	background-color: var(--c_darker);
 }
+
+input,
+textarea,
+button {
+	font-size: 24px;
+}
+
+.topbar,
+.current-room,
+.message-input {
+	background-color: var(--c_darker);
+}
+
+.messages {
+	margin: 0px 6px;
+	border-top: solid var(--c_secondary) 6px;
+	border-bottom: solid var(--c_secondary) 1px;
+}
+
+.navbar-toggle {
+	z-index: 10;
+	background-color: transparent;
+	color: var(--c_text);
+}
+
+.message-owner {
+	background-color: var(--c_dark);
+	padding: 2px 6px;
+	padding-right: 12px;
+}
+
+.sender .message-owner {
+	padding: 2px 6px;
+	padding-left: 12px;
+	background-color: var(--c_primary);
+}
+
+nav {
+	background-color: var(--c_darkest);
+}
+
+.room-input,
+.room-input input {
+	background-color: var(--c_text);
+}
+
+.room-input {
+	padding: 2px 18px;
+	background-color: var(--c_text);
+	border-radius: 1ch;
+}
+
+.room-input > input {
+	background-color: transparent;
+	/* color: var(--c_darkest); */
+	border: none;
+	outline: none;
+	width: 100%;
+	transition: width 0.12s;
+	transition: padding 0.06s;
+}
+
+.room-input > input:focus {
+	padding: 10px 0px;
+	transition: padding 0.12s;
+}
+
+.room {
+	color: var(--c_text);
+	min-width: 50%;
+	max-width: 80%;
+}
+
+.room p {
+	border: solid var(--c_text) 1px;
+	padding: 8px 8px;
+	font-size: 20px;
+	text-align: end;
+}
+
+.room-list {
+	border-right: solid var(--c_secondary) 4px;
+	padding-right: 8px;
+	margin-right: 5px;
+	row-gap: 6px;
+}
+
+.room-selected {
+	background-color: var(--c_text);
+	color: var(--c_darkest);
+	font-weight: bold;
+	align-self: flex-start;
+	max-width: 80%;
+	min-width: 60%;
+}
+
+.room-selected p {
+	text-align: start;
+}
+
+.message-input-container {
+	background-color: var(--c_dark);
+}
+
+.message-input-container * {
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: var(--c_text);
+}
+
+.message-send {
+	background-color: var(--c_secondary);
+	color: var(--c_darkest);
+	width: 2.5ch;
+	height: 2.5ch;
+	border-radius: 2ch;
+	position: relative;
+}
+
+/* ^^^ Styling */
 
 .grid-wrapper {
 	display: grid;
@@ -19,11 +151,145 @@ body {
 	grid-template-rows: 100vh;
 }
 
-.grid-wrapper * {
-	border: solid red 1px;
+.room-input-container {
+	position: relative;
+	top: -18px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
-@media screen and (max-width: 1080px) {
+.room-input {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.rooms {
+	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	overflow: scroll;
+	height: 65vh;
+}
+
+.room-list {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.topbar {
+	padding: 16px;
+	padding-top: 24px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.navbar-toggle {
+	position: fixed;
+	border: none;
+	top: 6px;
+	left: 6px;
+	width: 50px;
+}
+
+.appname {
+	font-weight: lighter;
+	letter-spacing: 0.2ch;
+}
+
+.username {
+	margin-top: 6px;
+	font-size: 80%;
+}
+
+.current-room {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.current-room > p {
+	font-size: 90%;
+	padding: 0px 20px;
+}
+
+.messages {
+	padding: 8px;
+	overflow: scroll;
+	display: flex;
+	flex-direction: column;
+}
+
+.messages * {
+	font-size: 16px;
+}
+
+.message-list {
+	padding: 6px;
+}
+
+.message {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 0px 50px 0px 0px;
+}
+
+.message[same-owner="false"] {
+	margin-top: 4px;
+}
+
+.message-value {
+	margin: 0px 0px 0px 10px;
+	padding: 3px;
+	border-radius: 0.6ch;
+}
+
+.sender {
+	align-self: flex-end;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 0px 0px 0px 50px;
+}
+
+.sender .message-value {
+	margin: 0px 10px 0px 0px;
+}
+
+.message-input {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	padding-right: 20px;
+}
+
+.message-input-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding: 2px 0px 2px 24px;
+	border-radius: 1ch;
+}
+
+.message-input textarea {
+	width: 10ch;
+	padding: 0px 8px;
+	resize: none;
+	transition: width 0.04s;
+}
+
+.message-input textarea:focus {
+	width: 16ch;
+	transition: width 0.12s;
+}
+
+@media screen and (max-width: 850px) {
 	.grid-wrapper {
 		display: grid;
 		width: 100vw;
@@ -33,194 +299,21 @@ body {
 	}
 
 	nav {
-		z-index: 0;
+		z-index: 1;
 		position: fixed;
 		width: 100vw;
 		height: 100vh;
-		left: 100vw;
-		background-color: black;
+		left: -100vw;
 		padding: 128px 20px;
 	}
 
-	.room-input-container {
-		position: relative;
-		top: -32px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
+	nav[open="true"] {
+		left: 0vw;
+		transition: left 0.2s;
 	}
 
-	.room-input, .room-input input {
-		background-color: white;
-		font-size: 16px;
-	}
-
-	.room-input {
-		padding: 8px 18px;
-		border-radius: 20px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	.room-input > input {
-		width: 120px;
-		transition: width 0.12s;
-	}
-
-	.room-input > input:focus {
-		width: 70vw;
-		transition: width 0.2s;
-	}
-
-	.rooms {
-		padding: 8px;
-		display: flex;
-		flex-direction: column;
-		overflow: scroll;
-		height: 65vh;
-	}
-
-	.room-list {
-		padding: 2px;
-		display: inline-flex;
-		flex-direction: column;
-		align-items: flex-end;
-		row-gap: 6px;
-	}
-
-	.room {
-		color: white;
-		min-width: 50%;
-		max-width: 80%;
-	}
-
-	.room p {
-		border: solid white 1px;
-		padding: 8px 8px;
-		font-size: 20px;
-		text-align: end;
-	}
-
-	.room-selected {
-		background-color: white;
-		color: black;
-		font-weight: bold;
-		align-self: flex-start;
-		max-width: 80%;
-		min-width: 60%;
-	}
-
-	.room-selected p {
-		text-align: start;
-	}
-
-	.topbar {
-		padding: 16px;
-		padding-top: 24px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-	}
-
-	.topbar > button {
-		position: fixed;
-		border: none;
-		background-color: red;
-		font-weight: bold;
-		top: 6px;
-		left: 6px;
-		width: 50px;
-	}
-
-	.appname {
-		font-weight: lighter;
-		letter-spacing: 0.2ch;
-	}
-
-	.username {
-		margin-top: 6px;
-		font-size: 80%;
-	}
-
-	.current-room {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
-	}
-
-	.current-room > p {
-		font-size: 90%;
-		padding: 0px 20px;
-	}
-
-	.messages {
-		padding: 8px;
-		overflow: scroll;
-		display: flex;
-		flex-direction: column;
-	}
-
-	.messages * {
-		font-size: 16px;
-	}
-
-	.message-list {
-		padding: 6px;
-	}
-
-	.message {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		margin: 0px 50px 0px 0px;
-	}
-
-	.message[same-owner="false"] {
-		margin-top: 4px;	
-	}
-
-	.message-value {
-		margin: 0px 0px 0px 10px;
-		padding: 3px;
-		border-radius: 0.6ch;
-	}
-
-	.sender {
-		align-self: flex-end;
-		flex-direction: column;
-		align-items: flex-end;
-		margin: 0px 0px 0px 50px;
-	}
-
-	.sender .message-value {
-		margin: 0px 10px 0px 0px;
-	}
-
-	.message-input {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	.message-input * {
-		font-size: 16px;
-	}
-
-	.message-input-container {
-		display: flex;
-		flex-direction: flex-end;
-		justify-content: flex-end;
-		padding: 0px 24px;
-	}
-
-	.message-input button {
-		width: 16px;
-	}
-
-	.message-input textarea {
-		width: 18ch;
-		resize: none;
+	nav[open="false"] {
+		left: -100vw;
+		transition: left 0.04s;
 	}
 }
