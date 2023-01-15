@@ -2,9 +2,9 @@ FROM node:slim
 WORKDIR /home/app/
 COPY . .
 #change to destination server
-ENV BACKEND_SERVER="10.105.26.130"
+ENV BACKEND_SERVER="0.0.0.0"
 #change to server port
-ENV BACKEND_PORT="30000"
+ENV BACKEND_PORT="8000"
 RUN sed -i "/server/ s/0.0.0.0/${BACKEND_SERVER}/" ./scripts/state.js
 RUN sed -i "/port/ s/8000/${BACKEND_PORT}/" ./scripts/state.js
 EXPOSE 3000

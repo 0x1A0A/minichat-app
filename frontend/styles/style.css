@@ -180,7 +180,7 @@ nav {
 }
 
 .message-input-container {
-	padding: 2px 0px 2px 24px;
+	padding: 2px 8px 2px 8px;
 	border-radius: 1ch;
 }
 
@@ -459,6 +459,16 @@ nav {
 	nav[open="false"] {
 		left: -100vw;
 		transition: left 0.04s;
+	}
+
+	.navbar-toggle[open="true"] {
+		rotate: -180deg;
+		transition: rotate 200ms;
+	}
+
+	.navbar-toggle[open="false"] {
+		rotate: 0deg;
+		transition: rotate 200ms;
 	}
 
 	.room-input-container {

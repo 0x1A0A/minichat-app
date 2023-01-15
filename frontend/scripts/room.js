@@ -17,6 +17,7 @@ const select_room = function (roomname) {
 	}
 	// change current room to room we are switching to
 	app.room.current = roomname;
+	document.querySelector('.current-room>p').textContent = roomname;
 	// load new message to the message list
 	load_messages(roomname);
 };

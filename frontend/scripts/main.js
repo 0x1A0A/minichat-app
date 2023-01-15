@@ -1,33 +1,43 @@
 "use strict";
 
-function main() {
-	let username_form = document.querySelector("#input-username");
+const main = function () {
+	const form = document.querySelector(".login-container");
 
-	username_form.addEventListener("keydown", (event) => {
-		if (event.key === "Enter" && username_form.value) {
-			document.querySelector(".login").classList.toggle("fadeout");
-			let username_input = document.querySelector(".username");
-			username_input.textContent = app.username = username_form.value;
-			username_input.classList.toggle("show-username");
-			document.querySelector("main").classList.toggle("fadein");
-		}
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
+		const input = form.querySelector("input");
+		let val = input.value;
+
+		val = val.trim();
+
+		if (!val) return;
+
+		app.username = val;
+		input.value = "";
+
+		document.querySelector(".username").textContent = app.username;
+		form.parentElement.setAttribute("open", "false");
 	});
 
-	let new_room_input = document.querySelector(".room-input>input");
+	const room_w = document.querySelector(".room-input-w>form");
+	const room_m = document.querySelector(".room-input-container>form");
 
-	new_room_input.addEventListener("keyup", (event) => {
-		if (event.key === "Enter" && new_room_input.value) {
-			create_room_menu(new_room_input.value);
-			new_room_input.value = "";
-		}
-	});
+	const getRoomName = function (e) {
+		e.preventDefault();
+		create_room_menu(e.target[0].value);
+		e.target[0].value = "";
+	};
 
-	let message_input = document.querySelector(".message-input textarea");
+	room_w.addEventListener("submit", getRoomName);
+	room_m.addEventListener("submit", getRoomName);
 
-	const send_message = () => {
+	const textarea = document.querySelector("textarea");
+	const icon = document.querySelector(".message-send");
+
+	const send_message = (message) => {
 		if (!app.username || !app.room.current) return;
 
-		let val = message_input.value;
+		let val = message;
 		val = val.trim();
 
 		if (!val) return;
@@ -41,13 +51,25 @@ function main() {
 		if (app.room.current) post_message(msg);
 	};
 
-	message_input.addEventListener("keyup", (event) => {
-		if (event.key === "Enter" && !event.getModifierState("Shift")) {
-			send_message();
-			message_input.value = "";
+	textarea.addEventListener("keydown", (e) => {
+		if (e.key === "Enter" && !e.getModifierState("Shift")) {
+			send_message(textarea.value);
+			textarea.value = "";
 		}
 	});
 
-}
+	icon.addEventListener("click", (e) => {
+		send_message(textarea.value);
+		textarea.value = "";
+	});
+
+	const nav_t = document.querySelector(".navbar-toggle");
+	let nav = document.querySelector("nav");
+	nav_t.addEventListener("click", (e) => {
+		let open = nav.getAttribute("open") === "true" ? "false" : "true";
+		nav.setAttribute("open", open);
+		nav_t.setAttribute("open", open);
+	});
+};
 
 main();

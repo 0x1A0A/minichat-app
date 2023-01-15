@@ -19,7 +19,7 @@ const get_messages = async function (roomname) {
 		.then((res) => {
 			if (res) {
 				app.room.element[roomname] = {
-					msg : new Array(),
+					msg: new Array(),
 				};
 				res.forEach((element) => {
 					element.sender = app.username == element.user;
@@ -63,7 +63,10 @@ const render_message = function (msg) {
 	// if this is user message add sender class so the message go to the right side
 	if (msg.sender) child.classList.toggle("sender");
 	if (prev_message) {
-		if (prev_message.getAttribute("owner") === msg.user) from.remove();
+		if (prev_message.getAttribute("owner") === msg.user) {
+			from.remove();
+			child.setAttribute("same-owner", "true");
+		}
 	}
 
 	child.setAttribute("owner", msg.user);

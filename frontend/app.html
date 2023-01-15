@@ -9,25 +9,29 @@
 		<link rel="stylesheet" href="styles/style.css" />
 	</head>
 	<body>
-		<aside class="login-page" open="false">
-			<div class="login-container">
+		<aside class="login-page" open="true">
+			<form class="login-container">
 				<p class="appname">_FREETEXT</p>
 				<p>Enter as</p>
 				<input type="text" placeholder="username" />
 				<button>ok let's go</button>
-			</div>
+			</form>
 		</aside>
 		<div class="grid-wrapper">
 			<div class="room-input-w">
-				<div class="room-input">
+				<form class="room-input">
 					<input type="text" placeholder="new room" />
-				</div>
+				</form>
 			</div>
 			<nav open="false">
 				<div class="room-input-container">
-					<div class="room-input">
-						<input type="text" placeholder="new room" />
-					</div>
+					<form class="room-input">
+						<input
+							type="text"
+							placeholder="new room"
+							name="roomname"
+						/>
+					</form>
 				</div>
 				<div class="rooms">
 					<template>
@@ -39,11 +43,11 @@
 				</div>
 			</nav>
 			<div class="topbar">
-				<button class="navbar-toggle"><p>>></p></button>
+				<button class="navbar-toggle" open="false"><p>>></p></button>
 				<p class="appname">_FREETEXT</p>
 				<p class="username">_usernamehere_</p>
 			</div>
-			<div class="current-room"><p>Room-name</p></div>
+			<div class="current-room"><p></p></div>
 			<div class="messages">
 				<template>
 					<div class="message" same-owner="false">
@@ -61,4 +65,8 @@
 			</div>
 		</div>
 	</body>
+	<script type="text/javascript" src="scripts/state.js"></script>
+	<script type="text/javascript" src="scripts/message.js"></script>
+	<script type="text/javascript" src="scripts/room.js"></script>
+	<script type="text/javascript" src="scripts/main.js"></script>
 </html>

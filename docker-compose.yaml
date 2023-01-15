@@ -5,7 +5,7 @@ services:
       - "3000:3000"
 
   server:
-    build: ./backend
+    build: ./backend/docker/
     ports: 
       - "8000:8000"
     environment:

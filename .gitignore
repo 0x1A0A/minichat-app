@@ -4,3 +4,4 @@
 /backend/.dockerignore
 /design
 /frontend/node_modules
+/backend/docker/chat-app
