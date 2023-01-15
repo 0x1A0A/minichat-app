@@ -19,13 +19,13 @@ body {
 	width: 100vw;
 	height: 100vh;
 	color: var(--c_text);
-	background-color: var(--c_darker);
+	background-color: var(--c_darkest);
 }
 
 input,
 textarea,
 button {
-	font-size: 24px;
+	font-size: 16px;
 }
 
 .topbar,
@@ -35,15 +35,14 @@ button {
 }
 
 .messages {
-	margin: 0px 6px;
+	background-color: var(--c_darker);
 	border-top: solid var(--c_secondary) 6px;
 	border-bottom: solid var(--c_secondary) 1px;
+	padding: 14px;
 }
 
 .navbar-toggle {
-	z-index: 10;
-	background-color: transparent;
-	color: var(--c_text);
+	display: none;
 }
 
 .message-owner {
@@ -62,30 +61,9 @@ nav {
 	background-color: var(--c_darkest);
 }
 
-.room-input,
-.room-input input {
-	background-color: var(--c_text);
-}
-
-.room-input {
-	padding: 2px 18px;
-	background-color: var(--c_text);
-	border-radius: 1ch;
-}
-
-.room-input > input {
-	background-color: transparent;
-	/* color: var(--c_darkest); */
-	border: none;
-	outline: none;
-	width: 100%;
-	transition: width 0.12s;
-	transition: padding 0.06s;
-}
-
-.room-input > input:focus {
-	padding: 10px 0px;
-	transition: padding 0.12s;
+.current-room,
+.room-input-container {
+	display: none;
 }
 
 .room {
@@ -139,38 +117,164 @@ nav {
 	height: 2.5ch;
 	border-radius: 2ch;
 	position: relative;
+	border: none;
+	outline: none;
+}
+
+.message-input textarea {
+	width: 250px;
+	padding: 0px 8px;
+	resize: none;
+	transition: width 0.04s;
+}
+
+.message-input textarea:focus {
+	width: 300px;
+	transition: width 0.12s;
+}
+
+.login-page {
+	background-color: var(--c_darkest);
+	width: 100vw;
+	height: 100vh;
+}
+
+.login-container {
+	position: relative;
+	top: -100px;
+	border-top: solid var(--c_secondary) 4px;
+	padding: 20px;
+}
+
+.login-container :nth-child(2) {
+	margin-top: 8px;
+}
+
+.login-container :not(.appname, input) {
+	align-self: flex-start;
+	margin: 4px 0px;
+}
+
+.login-container input {
+	padding: 8px;
+	outline: none;
+	border: none;
+	color: var(--c_darkest);
+	background-color: var(--c_text);
+}
+
+.login-container button {
+	text-transform: uppercase;
+	border: none;
+	border-radius: 0px;
+	outline: none;
+	padding: 2px;
+	width: 100%;
+	color: var(--c_darkest);
+	background-color: var(--c_secondary);
+}
+
+.message-input {
+	padding-right: 20px;
+	column-gap: 8px;
+}
+
+.message-input-container {
+	padding: 2px 0px 2px 24px;
+	border-radius: 1ch;
+}
+
+.message-input button {
+	display: inline;
+	text-align: center;
 }
 
 /* ^^^ Styling */
+
+.login-page {
+	z-index: 99;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
 
 .grid-wrapper {
 	display: grid;
 	width: 100vw;
 	height: 100vh;
 	grid-template-columns: 300px auto;
-	grid-template-rows: 100vh;
+	grid-template-rows: 128px auto 48px;
 }
 
-.room-input-container {
+.topbar {
+	grid-area: 1/2/2/3;
+}
+
+.room-input-w {
+	grid-area: 1/1/2/2;
+}
+
+nav {
+	grid-area: 2/1/4/2;
+}
+
+.messages {
+	grid-area: 2/2/3/3;
+}
+
+.message-input {
+	grid-area: 3/2/4/3;
+}
+
+nav {
+	padding: 8px;
+	overflow: auto;
+}
+
+.room-input-w {
+	background-color: var(--c_darkest);
 	position: relative;
-	top: -18px;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	justify-content: center;
+	padding: 20px;
 }
 
 .room-input {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	padding: 2px 18px;
+	background-color: var(--c_text);
+	border-radius: 1ch;
+}
+
+.room-input > input {
+	background-color: transparent;
+	border: none;
+	outline: none;
+	width: 100%;
+	transition: width 0.12s;
+	transition: padding 0.06s;
+}
+
+.room-input > input:focus {
+	padding: 10px 0px;
+	transition: padding 0.12s;
 }
 
 .rooms {
 	padding: 8px;
 	display: flex;
 	flex-direction: column;
-	overflow: scroll;
-	height: 65vh;
 }
 
 .room-list {
@@ -205,20 +309,12 @@ nav {
 	font-size: 80%;
 }
 
-.current-room {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-}
-
 .current-room > p {
 	font-size: 90%;
 	padding: 0px 20px;
 }
 
 .messages {
-	padding: 8px;
 	overflow: scroll;
 	display: flex;
 	flex-direction: column;
@@ -262,40 +358,87 @@ nav {
 
 .message-input {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-end;
-	padding-right: 20px;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
 }
 
 .message-input-container {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-end;
 	align-items: flex-end;
-	padding: 2px 0px 2px 24px;
-	border-radius: 1ch;
 }
 
-.message-input textarea {
-	width: 10ch;
-	padding: 0px 8px;
-	resize: none;
-	transition: width 0.04s;
+/* animation */
+.room {
+	transition: padding 80ms, margin 120ms;
 }
 
-.message-input textarea:focus {
-	width: 16ch;
-	transition: width 0.12s;
+.room:not(.room-selected):hover {
+	background-color: var(--c_text);
+	color: var(--c_darkest);
+	padding-right: 20px;
+	margin-right: 10px;
+	transition: padding 160ms, margin 200ms;
 }
+
+.room-selected:hover {
+	padding: 8px;
+	transition: padding 160ms, margin 200ms;
+}
+
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+		top: 0;
+	}
+	100% {
+		opacity: 0;
+		top: -100vh;
+	}
+}
+
+.login-page[open="false"] {
+	animation: fadeout 250ms ease-in-out forwards 100ms;
+}
+
+/* media query */
 
 @media screen and (max-width: 850px) {
+	.room-input-w {
+		display: none;
+	}
+
 	.grid-wrapper {
 		display: grid;
 		width: 100vw;
 		height: 100vh;
 		grid-template-columns: 100vw;
-		grid-template-rows: 128px 48px auto 64px;
+		grid-template-rows: 128px 48px auto 48px;
+	}
+
+	.navbar-toggle {
+		display: initial;
+		z-index: 10;
+		background-color: transparent;
+		color: var(--c_text);
+	}
+
+	.topbar {
+		grid-area: 1/1/2/2;
+	}
+
+	.current-room {
+		grid-area: 2/1/3/2;
+	}
+
+	.messages {
+		grid-area: 3/1/4/2;
+	}
+
+	.message-input {
+		grid-area: 4/1/5/2;
 	}
 
 	nav {
@@ -305,6 +448,7 @@ nav {
 		height: 100vh;
 		left: -100vw;
 		padding: 128px 20px;
+		overflow: initial;
 	}
 
 	nav[open="true"] {
@@ -315,5 +459,38 @@ nav {
 	nav[open="false"] {
 		left: -100vw;
 		transition: left 0.04s;
+	}
+
+	.room-input-container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: relative;
+		top: -18px;
+	}
+
+	.room-input,
+	.room-input input {
+		background-color: var(--c_text);
+	}
+
+	.current-room {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+
+	.rooms {
+		height: 65vh;
+		overflow: scroll;
+	}
+
+	.message-input textarea {
+		width: 30vw;
+	}
+
+	.message-input textarea:focus {
+		width: 60vw;
 	}
 }

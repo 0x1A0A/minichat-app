@@ -9,7 +9,20 @@
 		<link rel="stylesheet" href="styles/style.css" />
 	</head>
 	<body>
+		<aside class="login-page" open="false">
+			<div class="login-container">
+				<p class="appname">_FREETEXT</p>
+				<p>Enter as</p>
+				<input type="text" placeholder="username" />
+				<button>ok let's go</button>
+			</div>
+		</aside>
 		<div class="grid-wrapper">
+			<div class="room-input-w">
+				<div class="room-input">
+					<input type="text" placeholder="new room" />
+				</div>
+			</div>
 			<nav open="false">
 				<div class="room-input-container">
 					<div class="room-input">
@@ -22,23 +35,7 @@
 							<p class="room-label">Name</p>
 						</div>
 					</template>
-					<div class="room-list">
-						<div class="room">
-							<p class="room-label">Name</p>
-						</div>
-						<div class="room">
-							<p class="room-label">Name</p>
-						</div>
-						<div class="room room-selected">
-							<p class="room-label">Name</p>
-						</div>
-						<div class="room">
-							<p class="room-label">Name</p>
-						</div>
-						<div class="room">
-							<p class="room-label">Name</p>
-						</div>
-					</div>
+					<div class="room-list"></div>
 				</div>
 			</nav>
 			<div class="topbar">
@@ -54,56 +51,13 @@
 						<p class="message-value">MSG A</p>
 					</div>
 				</template>
-				<div class="message-list">
-					<div class="message" same-owner="false">
-						<p class="message-owner">USER A</p>
-						<p class="message-value">MSG A</p>
-					</div>
-					<div class="message sender" same-owner="false">
-						<p class="message-owner">USER A</p>
-						<p class="message-value">
-							Paragraphs are the building blocks of papers. Many
-							students define paragraphs in terms of length: a
-							paragraph is a group of at least five sentences, a
-							paragraph is half a page long, etc. In reality,
-							though, the unity and coherence of ideas among
-							sentences is what constitutes a paragraph. A
-							paragraph is defined as “a group of sentences or a
-							single sentence that forms a unit” (Lunsford and
-							Connors 116). Length and appearance do not determine
-							whether a section in a paper is a paragraph. For
-							instance, in some styles of writing, particularly
-							journalistic styles, a paragraph can be just one
-							sentence long. Ultimately, a paragraph is a sentence
-							or group of sentences that support one main idea. In
-							this handout, we will refer to this as the
-							“controlling idea,” because it controls what happens
-							in the rest of the paragraph.
-						</p>
-					</div>
-					<div class="message" same-owner="false">
-						<p class="message-owner">USER A</p>
-						<p class="message-value">MSG A</p>
-					</div>
-					<div class="message" same-owner="true">
-						<p class="message-owner">USER A</p>
-						<p class="message-value">MSG A</p>
-					</div>
-					<div class="message" same-owner="true">
-						<p class="message-owner">USER A</p>
-						<p class="message-value">MSG A</p>
-					</div>
-					<div class="message" same-owner="false">
-						<p class="message-owner">USER A</p>
-						<p class="message-value">MSG A</p>
-					</div>
-				</div>
+				<div class="message-list"></div>
 			</div>
 			<div class="message-input">
 				<div class="message-input-container">
 					<textarea rows="1" placeholder="message"></textarea>
-					<button class="message-send">=></button>
 				</div>
+				<button class="message-send">=></button>
 			</div>
 		</div>
 	</body>
