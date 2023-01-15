@@ -1,0 +1,7 @@
+FROM debian:sid-slim
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
+# app binary got from cargo build --release
+# and just paste is here in this directory
+COPY chat-app /usr/local/bin/chat-app
+EXPOSE 8000
+CMD ["chat-app"]
