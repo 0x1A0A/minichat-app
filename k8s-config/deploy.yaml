@@ -34,6 +34,9 @@ data:
   rocket_address: 0.0.0.0
   db_server: db-svc
   db_port: "27017"
+  app_server: 10.105.26.130
+  app_port: 30000
+  web_port: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -172,6 +175,22 @@ spec:
       containers:
       - image: 0x1a0a/chat-app-frontend
         name: frontend-server
+        env:
+        - name: APP_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: app_config
+              key: app_server
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app_config
+              key: app_port
+        - name: WEB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app_config
+              key: web_port
 ---
 apiVersion: v1
 kind: Service
