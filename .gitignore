@@ -5,3 +5,4 @@
 /design
 /frontend/node_modules
 /backend/docker/chat-app
+/frontend/scripts/state.js
