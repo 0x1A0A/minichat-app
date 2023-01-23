@@ -179,17 +179,17 @@ spec:
         - name: APP_SERVER
           valueFrom:
             configMapKeyRef:
-              name: app_config
+              name: app-config
               key: app_server
         - name: APP_PORT
           valueFrom:
             configMapKeyRef:
-              name: app_config
+              name: app-config
               key: app_port
         - name: WEB_PORT
           valueFrom:
             configMapKeyRef:
-              name: app_config
+              name: app-config
               key: web_port
 ---
 apiVersion: v1
