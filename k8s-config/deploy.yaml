@@ -35,8 +35,8 @@ data:
   db_server: db-svc
   db_port: "27017"
   app_server: 10.105.26.130
-  app_port: 30000
-  web_port: 3000
+  app_port: "30000"
+  web_port: "3000"
 ---
 apiVersion: apps/v1
 kind: Deployment
