@@ -2,7 +2,11 @@ services:
   app:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "80:80"
+    environment:
+      APP_SERVER: 0.0.0.0
+      APP_PORT: 8000
+  # sadly I cannot find an easy way to run the apply-config.sh here
 
   server:
     build: ./backend/docker/

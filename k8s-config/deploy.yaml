@@ -36,7 +36,6 @@ data:
   db_port: "27017"
   app_server: 10.105.26.130
   app_port: "30000"
-  web_port: "3000"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -186,11 +185,10 @@ spec:
             configMapKeyRef:
               name: app-config
               key: app_port
-        - name: WEB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: web_port
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/usr/share/nginx/html/apply-config.sh", "/usr/share/nginx/html"]
 ---
 apiVersion: v1
 kind: Service
@@ -201,8 +199,8 @@ metadata:
   namespace: freetext
 spec:
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 8080
+      targetPort: 80
       nodePort: 30080
   selector:
     app: frontend
