@@ -1,9 +1,4 @@
-use mongodb::Client;
-use rocket::{http::Status, response::status, serde::json::Json, State};
-
-use crate::{db, models, response};
-
-type ResError = status::Custom<Json<response::ErrorReason>>;
+q
 
 // #[get("/user/<name>")]
 // pub async fn get_user_with_name(db: &State<Client>, name: String)
