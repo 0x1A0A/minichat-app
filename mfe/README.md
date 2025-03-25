@@ -2,11 +2,17 @@
 
 this project is using pnpm and rsbuild.
 
+## Rsbuild
+
 init new rsbuild.
 
 ```
 pnpm create rsbuild@latest
 ```
+
+## deps
+
+### vue and module federation
 
 add default dependencies.
 
@@ -14,6 +20,20 @@ add default dependencies.
 pnpm add @vueuse/core pinia @twind/{core,preset-{autoprefix,tailwind}} @module-federation/enhanced
 pnpm add @vue/language-server @module-federation/rsbuild-plugin --save-dev
 ```
+
+### unit testing / vitest
+
+for unit testing. this is what I use.
+
+```
+pnpm add -D vitest @testing-library/vue happy-dom
+// if you also need test coverage
+pnpm add -D @vitest/coverage-v8
+```
+
+I also recommeded to add vitest to your test script.
+
+### twind for css component
 
 add twind.config.ts
 
@@ -26,6 +46,8 @@ export default defineConfig({
   presets: [presetAutoprefix(), presetTailwind()],
 });
 ```
+
+## configuration
 
 edit your rsbuild
 
@@ -74,4 +96,10 @@ now edit in your index.ts to import bootstrap file -- to make app start as async
 
 ```
 import('./bootstrap');
+```
+
+recommended to remove --open in dev script.
+
+```
+"dev": "rsbuild dev",
 ```
