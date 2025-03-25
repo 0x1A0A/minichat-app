@@ -1,24 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import CreateRoom from './CreateRoom.vue';
 import Room from './Room.vue';
+import { useRoomsStore } from '../stores/Room.store';
+import { storeToRefs } from 'pinia';
 
-const rooms = ref<Set<string>>(new Set());
-const selected_room = ref('');
+const roomsStore = useRoomsStore();
+
+const { rooms, selected: selected_room } = storeToRefs(roomsStore);
 
 function joinRoom(name: string) {
-  selected_room.value = name;
-
-  rooms.value.add(name);
-}
-
-function room_selected(name: string) {
-  selected_room.value = name;
-}
-
-function room_remove(name: string) {
-  rooms.value.delete(name);
-  if (selected_room.value === name) selected_room.value = '';
+  roomsStore.add(name).select(name);
 }
 </script>
 
@@ -30,8 +21,8 @@ function room_remove(name: string) {
         <Room
           :name="room"
           :selected="room === selected_room"
-          @room_selected="room_selected"
-          @remove="room_remove"
+          @room_selected="roomsStore.select"
+          @remove="roomsStore.remove"
         />
       </template>
     </div>

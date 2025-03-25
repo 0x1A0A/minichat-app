@@ -1,8 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/vue';
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, beforeEach } from 'vitest';
 import Rooms from './Rooms.vue';
+import { createPinia, setActivePinia } from 'pinia';
 
 describe('Rooms components', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia());
+  });
   describe('create Room', () => {
     test('should create room when add create room', async () => {
       render(Rooms);
