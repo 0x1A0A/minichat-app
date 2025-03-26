@@ -26,9 +26,37 @@ pnpm add @vue/language-server @module-federation/rsbuild-plugin --save-dev
 for unit testing. this is what I use.
 
 ```
-pnpm add -D vitest @testing-library/vue happy-dom
-// if you also need test coverage
+pnpm add -D vitest @testing-library/vue happy-dom @vitejs/plugin-vue
+# if you also need test coverage
 pnpm add -D @vitest/coverage-v8
+# this is helpful if you need to simulate user interaction
+pnpm add -D @testing-library/user-event
+```
+
+add vitest.setup.ts for setting up test.
+
+```
+import { beforeEach } from 'vitest';
+import { cleanup } from '@testing-library/vue';
+
+beforeEach(() => {
+  cleanup();
+});
+```
+
+finally add vitest.config.ts
+
+```
+import { defineConfig } from 'vitest/config';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+  plugins: [vue()],
+  test: {
+    environment: 'happy-dom',
+    setupFiles: ['vitest.setup.ts'],
+  },
+});
 ```
 
 I also recommeded to add vitest to your test script.

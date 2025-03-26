@@ -4,6 +4,7 @@ import { useUserStore } from 'users/store/users';
 
 import Login from 'users/Login';
 import Rooms from 'rooms/Rooms';
+import Messages from 'chat/Messages';
 import Navbar from './components/Navbar.vue';
 
 const user = useUserStore();
@@ -24,8 +25,7 @@ const { verified } = storeToRefs(user);
     >
       <Navbar class="col-span-2" />
       <Rooms class="row-span-2" />
-      <div class="bg-gray-50 row-span-2">chat here</div>
-      <div></div>
+      <Messages class="row-span-2" />
     </main>
   </template>
 </template>

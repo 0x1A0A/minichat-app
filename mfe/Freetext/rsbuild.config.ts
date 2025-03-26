@@ -11,6 +11,7 @@ export default defineConfig({
       remotes: {
         users: 'users@http://localhost:3001/mf-manifest.json',
         rooms: 'rooms@http://localhost:3002/mf-manifest.json',
+        chat: 'chat@http://localhost:3003/mf-manifest.json',
       },
       shared: {
         vue: {

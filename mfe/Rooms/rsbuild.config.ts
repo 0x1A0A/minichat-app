@@ -10,6 +10,7 @@ export default defineConfig({
       name: 'room',
       exposes: {
         './Rooms': './src/components/Rooms.vue',
+        './store/rooms': './src/stores/Room.store.ts',
       },
       shared: {
         vue: {
