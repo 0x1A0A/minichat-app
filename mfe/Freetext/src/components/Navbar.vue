@@ -14,6 +14,7 @@ const first = computed(() => user.name?.[0] || '-');
       <div
         class="peer w-8 h-8 bg-black rounded-full flex items-center justify-center relative cursor-pointer"
         @click.stop="open_menu = !open_menu"
+        data-testid="user-icon"
       >
         <span class="text-white"> {{ first }}</span>
       </div>
