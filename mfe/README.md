@@ -27,10 +27,9 @@ for unit testing. this is what I use.
 
 ```
 pnpm add -D vitest @testing-library/vue happy-dom @vitejs/plugin-vue
-# if you also need test coverage
-pnpm add -D @vitest/coverage-v8
-# this is helpful if you need to simulate user interaction
-pnpm add -D @testing-library/user-event
+pnpm add -D @vitest/coverage-v8 # if you also need test coverage
+pnpm add -D @testing-library/user-event # this is helpful if you need to simulate user interaction
+pnpm add -D @module-federation/native-federation-tests # this is for module federation testing, but there is no .vue support yet
 ```
 
 add vitest.setup.ts for setting up test.
@@ -59,6 +58,43 @@ export default defineConfig({
 });
 ```
 
+since there is no native test support for vue then we also need to config vitest to know which module that need to be virtual.
+
+```
+// This is how I config it
+export default defineConfig({
+  plugins: [
+    {
+      name: 'virtual-modules',
+      resolveId(id) {
+        // your remote module here
+        const remotes = ['users/store/users', 'rooms/store/rooms'];
+        if (remotes.includes(id)) {
+          return `virtual:${id}`;
+        }
+      },
+    },
+    ...
+  ],
+  ...
+});
+```
+
+and then in you test you can use "vi.mock" to mock the module.
+
+```
+...
+
+vi.mock('users/store/users', () => ({
+  useUserStore: vi.fn(() => ({
+    name: 'TestUser',
+  })),
+}));
+
+
+...
+``
+
 I also recommeded to add vitest to your test script.
 
 ### twind for css component
@@ -66,13 +102,15 @@ I also recommeded to add vitest to your test script.
 add twind.config.ts
 
 ```
+
 import { defineConfig } from '@twind/core';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetTailwind from '@twind/preset-tailwind';
 
 export default defineConfig({
-  presets: [presetAutoprefix(), presetTailwind()],
+presets: [presetAutoprefix(), presetTailwind()],
 });
+
 ```
 
 ## configuration
@@ -80,36 +118,39 @@ export default defineConfig({
 edit your rsbuild
 
 ```
+
 import { defineConfig } from '@rsbuild/core';
 import { pluginVue } from '@rsbuild/plugin-vue';
 import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
 import { dependencies } from './package.json';
 
 export default defineConfig({
-  plugins: [
-    pluginVue(),
-    pluginModuleFederation({
-      name: <mfe-name>,
-      shared: {
-        vue: {
-          singleton: true,
-          eager: true,
-          requiredVersion: dependencies.vue,
-        },
-        pinia: { singleton: true, eager: true },
-      },
-      dts: {
-        generateTypes: { compilerInstance: 'vue-tsc' },
-      },
-    }),
-  ],
-  server: { port: <mfe-port> },
+plugins: [
+pluginVue(),
+pluginModuleFederation({
+name: <mfe-name>,
+shared: {
+vue: {
+singleton: true,
+eager: true,
+requiredVersion: dependencies.vue,
+},
+pinia: { singleton: true, eager: true },
+},
+dts: {
+generateTypes: { compilerInstance: 'vue-tsc' },
+},
+}),
+],
+server: { port: <mfe-port> },
 });
+
 ```
 
 add bootstrap.ts file -- this act as you main entry
 
 ```
+
 import { createApp } from 'vue';
 import App from './App.vue';
 import { install } from '@twind/core';
@@ -118,16 +159,23 @@ import { createPinia } from 'pinia';
 
 install(config);
 createApp(App).use(createPinia()).mount('#root');
+
 ```
 
 now edit in your index.ts to import bootstrap file -- to make app start as async I guess?
 
 ```
+
 import('./bootstrap');
+
 ```
 
 recommended to remove --open in dev script.
 
 ```
+
 "dev": "rsbuild dev",
+
+```
+
 ```
