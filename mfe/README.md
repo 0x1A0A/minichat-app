@@ -93,7 +93,7 @@ vi.mock('users/store/users', () => ({
 
 
 ...
-``
+```
 
 I also recommeded to add vitest to your test script.
 
@@ -175,6 +175,8 @@ recommended to remove --open in dev script.
 ```
 
 "dev": "rsbuild dev",
+
+```
 
 ```
 
