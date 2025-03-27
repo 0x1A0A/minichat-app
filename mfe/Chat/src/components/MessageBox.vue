@@ -18,7 +18,7 @@ const room_messages = computed(() => messages.get(rooms.selected!));
 
 <template>
   <section class="w-full h-full grid grid-rows-[1fr_auto]">
-    <div class="bg-gray-100 flex flex-col p-4 gap-0">
+    <div class="bg-gray-100 flex flex-col p-4 gap-0" data-testid="messages-box">
       <div
         v-for="(msg, index) in room_messages"
         class="w-full flex"

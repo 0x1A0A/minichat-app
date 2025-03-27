@@ -15,11 +15,7 @@ export const useMessagesStore = defineStore('messages', {
       return this.data.get(room) ?? [];
     },
     add(room: string, msg: string, user: string) {
-      let data: IMessage[] = [];
-      if (this.data.has(room)) {
-        data = this.data.get(room)!;
-      }
-
+      let data: IMessage[] = this.data.get(room) ?? [];
       data.push({ value: msg, room, user });
       this.data.set(room, data);
     },
