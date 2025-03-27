@@ -11,7 +11,7 @@ export declare const useMessagesStore: import("pinia").StoreDefinition<"messages
         value: string;
         room: string;
         user: string;
-    }[] | undefined;
-    add(msg: string, room: string, user: string): void;
+    }[];
+    add(room: string, msg: string, user: string): void;
 }>;
 export {};
