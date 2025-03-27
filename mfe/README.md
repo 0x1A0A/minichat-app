@@ -102,13 +102,12 @@ I also recommeded to add vitest to your test script.
 add twind.config.ts
 
 ```
-
 import { defineConfig } from '@twind/core';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetTailwind from '@twind/preset-tailwind';
 
 export default defineConfig({
-presets: [presetAutoprefix(), presetTailwind()],
+  presets: [presetAutoprefix(), presetTailwind()],
 });
 
 ```
@@ -118,31 +117,34 @@ presets: [presetAutoprefix(), presetTailwind()],
 edit your rsbuild
 
 ```
-
 import { defineConfig } from '@rsbuild/core';
 import { pluginVue } from '@rsbuild/plugin-vue';
-import { pluginModuleFederation } from '@module-federation/rsbuild-plugin';
+import {
+  ModuleFederationOptions,
+  pluginModuleFederation,
+} from '@module-federation/rsbuild-plugin';
 import { dependencies } from './package.json';
 
+const moduleFederationConfig: ModuleFederationOptions = {
+  name: 'names',
+  exposes: { },
+  remotes: { },
+  shared: {
+    vue: {
+      singleton: true,
+      eager: true,
+      requiredVersion: dependencies.vue,
+    },
+    pinia: { singleton: true, eager: true },
+  },
+  dts: {
+    generateTypes: { compilerInstance: 'vue-tsc' },
+  },
+};
+
 export default defineConfig({
-plugins: [
-pluginVue(),
-pluginModuleFederation({
-name: <mfe-name>,
-shared: {
-vue: {
-singleton: true,
-eager: true,
-requiredVersion: dependencies.vue,
-},
-pinia: { singleton: true, eager: true },
-},
-dts: {
-generateTypes: { compilerInstance: 'vue-tsc' },
-},
-}),
-],
-server: { port: <mfe-port> },
+  plugins: [pluginVue(), pluginModuleFederation(moduleFederationConfig)],
+  server: { port: port },
 });
 
 ```
@@ -150,7 +152,6 @@ server: { port: <mfe-port> },
 add bootstrap.ts file -- this act as you main entry
 
 ```
-
 import { createApp } from 'vue';
 import App from './App.vue';
 import { install } from '@twind/core';
@@ -165,7 +166,6 @@ createApp(App).use(createPinia()).mount('#root');
 now edit in your index.ts to import bootstrap file -- to make app start as async I guess?
 
 ```
-
 import('./bootstrap');
 
 ```
@@ -173,11 +173,6 @@ import('./bootstrap');
 recommended to remove --open in dev script.
 
 ```
-
 "dev": "rsbuild dev",
-
-```
-
-```
 
 ```
