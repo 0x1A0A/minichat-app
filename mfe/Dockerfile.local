@@ -1,0 +1,9 @@
+FROM node:20-alpine as BASE
+
+WORKDIR /app
+
+COPY . .
+RUN rm -rf ./node_modules
+RUN npm install -g pnpm && pnpm i
+
+CMD pnpm dev --host 0.0.0.0
