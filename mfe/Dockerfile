@@ -1,4 +1,4 @@
-FROM node:20-alpine as BASE
+FROM base-mfe-vue:rsbuild as BASE
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ ENV MFE_SERVER=${ARG_MFE_SERVER}
 
 COPY . .
 RUN rm -rf ./node_modules
-RUN npm install -g pnpm && pnpm i && pnpm build
+RUN pnpm i && pnpm build
 
 
 FROM nginx:stable-alpine

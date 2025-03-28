@@ -7,7 +7,16 @@ and also you can switch to other room that has been added to the app.
 
 ## How to run mfe compose
 
-go to mfe folder.
+first we need image base-mfe-vue:rsbuild to speed up build/install time.
+docker file and package.json are provided in mfe/base
+
+go there and run
+
+```
+docker build . -t base-mfe-vue:rsbuild
+```
+
+then go to deploy/container folder.
 
 run in dev mode.
 
