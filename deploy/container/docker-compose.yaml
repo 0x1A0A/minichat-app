@@ -1,7 +1,7 @@
 services:
   mfe-user:
     build:
-      context: ./mfe/Users/
+      context: ../../mfe/Users/
       dockerfile: ../Dockerfile
       args:
         ARG_MFE_SERVER: "http://localhost:8080"
@@ -10,7 +10,7 @@ services:
 
   mfe-room:
     build:
-      context: ./mfe/Rooms/
+      context: ../../mfe/Rooms/
       dockerfile: ../Dockerfile
       args:
         ARG_MFE_SERVER: "http://localhost:8080"
@@ -21,7 +21,7 @@ services:
 
   mfe-chat:
     build:
-      context: ./mfe/Chat/
+      context: ../../mfe/Chat/
       dockerfile: ../Dockerfile
       args:
         ARG_MFE_SERVER: "http://localhost:8080"
@@ -30,7 +30,7 @@ services:
 
   mfe-host:
     build:
-      context: ./mfe/Freetext/
+      context: ../../mfe/Freetext/
       dockerfile: ../Dockerfile
       args:
         ARG_MFE_SERVER: "http://localhost:8080"
@@ -40,7 +40,7 @@ services:
   ingress:
     image: nginx
     volumes:
-      - ./mfe/mfe-prd-nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../../mfe/nginx/mfe-prd-nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 8080:80
     depends_on:

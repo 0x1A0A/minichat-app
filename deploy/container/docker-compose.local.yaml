@@ -1,0 +1,47 @@
+services:
+  mfe-user:
+    build:
+      context: ../../mfe/Users/
+      dockerfile: ../Dockerfile.local
+    ports:
+      - 3001:3001
+    volumes:
+      - ../../mfe/Users/src:/app/src
+      - ../../mfe/Users/rsbuild.config.ts:/app/rsbuild.config.ts
+
+  mfe-room:
+    build:
+      context: ../../mfe/Rooms/
+      dockerfile: ../Dockerfile.local
+    ports:
+      - 3002:3002
+    volumes:
+      - ../../mfe/Rooms/src:/app/src
+      - ../../mfe/Rooms/rsbuild.config.ts:/app/rsbuild.config.ts
+
+  mfe-chat:
+    build:
+      context: ../../mfe/Chat/
+      dockerfile: ../Dockerfile.local
+    ports:
+      - 3003:3003
+    volumes:
+      - ../../mfe/Chat/src:/app/src
+      - ../../mfe/Chat/rsbuild.config.ts:/app/rsbuild.config.ts
+
+  mfe-host:
+    build:
+      context: ../../mfe/Freetext/
+      dockerfile: ../Dockerfile.local
+    ports:
+      - 3000:3000
+    volumes:
+      - ../../mfe/Freetext/src:/app/src
+      - ../../mfe/Freetext/rsbuild.config.ts:/app/rsbuild.config.ts
+
+  ingress:
+    image: nginx
+    volumes:
+      - ../../mfe/nginx/mfe-local-nginx.conf:/etc/nginx/conf.d/mfe.conf
+    ports:
+      - 8080:80
