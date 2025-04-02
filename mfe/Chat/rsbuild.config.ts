@@ -41,4 +41,11 @@ const moduleFederationConfig: ModuleFederationOptions = {
 export default defineConfig({
   plugins: [pluginVue(), pluginModuleFederation(moduleFederationConfig)],
   server: { port: 3003, base: '/chat' },
+  source: {
+    define: {
+      'import.meta.env.CHAT_SERVER': JSON.stringify(
+        process.env.CHAT_SERVER || 'ws://localhost:3001/ws',
+      ),
+    },
+  },
 });

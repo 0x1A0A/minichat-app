@@ -7,7 +7,7 @@ import { useMessagesStore } from './Messages.store';
 
 export const useChatServer = defineStore('chat-server', () => {
   const { status, data, send, open, close } = useWebSocket(
-    'ws://localhost:3100/ws',
+    import.meta.env.CHAT_SERVER,
     { immediate: false },
   );
   const rooms = useRoomsStore();

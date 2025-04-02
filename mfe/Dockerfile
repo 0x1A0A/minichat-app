@@ -3,7 +3,10 @@ FROM base-mfe-vue:rsbuild as BASE
 WORKDIR /app
 
 ARG ARG_MFE_SERVER
+ARG ARG_CHAT_SERVER
+
 ENV MFE_SERVER=${ARG_MFE_SERVER}
+ENV CHAT_SERVER=${ARG_CHAT_SERVER}
 
 COPY . .
 RUN rm -rf ./node_modules
