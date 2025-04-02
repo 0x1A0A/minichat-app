@@ -23,6 +23,7 @@ const moduleFederationConfig: ModuleFederationOptions = {
   },
   exposes: {
     './Messages': './src/components/MessageBox.vue',
+    './stores/chatServer': './src/stores/ChatServer.store.ts',
   },
   shared: {
     vue: {

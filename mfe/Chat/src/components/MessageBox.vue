@@ -4,14 +4,12 @@ import { useUserStore } from 'users/store/users';
 import { useRoomsStore } from 'rooms/store/rooms';
 import { useMessagesStore } from '../stores/Messages.store';
 import ChatBox from './ChatBox.vue';
+import { useChatServer } from '../stores/ChatServer.store';
 
 const user = useUserStore();
 const rooms = useRoomsStore();
 const messages = useMessagesStore();
-
-function sendMsg(message: string) {
-  messages.add(rooms.selected!, message, user.name!);
-}
+const chatServer = useChatServer();
 
 const room_messages = computed(() => messages.get(rooms.selected!));
 </script>
@@ -28,10 +26,10 @@ const room_messages = computed(() => messages.get(rooms.selected!));
         ]"
       >
         <div class="bg-green-400 px-2 py-1">
-          <span>{{ msg.value }} {{ msg.user }}</span>
+          <pre>{{ msg.value }} {{ msg.user }}</pre>
         </div>
       </div>
     </div>
-    <ChatBox @send="sendMsg" />
+    <ChatBox @send="chatServer.sendMessage" />
   </section>
 </template>

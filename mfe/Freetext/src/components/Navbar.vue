@@ -2,15 +2,21 @@
 import { useUserStore } from 'users/store/users';
 import { computed, ref } from 'vue';
 
+const props = defineProps({ wsStatus: String });
+
 const user = useUserStore();
 const open_menu = ref(false);
 
 const first = computed(() => user.name?.[0] || '-');
+
+const status = computed(() =>
+  props.wsStatus === 'OPEN' ? 'CONNETED' : props.wsStatus,
+);
 </script>
 
 <template>
   <nav class="w-full px-2 py-1 bg-green-400">
-    <div>
+    <div class="flex items-center place-content-between">
       <div
         class="peer w-8 h-8 bg-black rounded-full flex items-center justify-center relative cursor-pointer"
         @click.stop="open_menu = !open_menu"
@@ -26,6 +32,7 @@ const first = computed(() => user.name?.[0] || '-');
           <button @click="user.logout">Logout</button>
         </div>
       </div>
+      {{ status }}
     </div>
   </nav>
 </template>
