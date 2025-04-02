@@ -1,0 +1,16 @@
+[package]
+name = "chat_server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix = "0.13.5"
+actix-web = "4.10.2"
+actix-ws = "0.3.0"
+env_logger = "0.11.7"
+futures = "0.3.31"
+futures-util = "0.3.31"
+mongodb = "3.2.3"
+serde = "1.0.219"
+tokio = "1.44.1"
+uuid = "1.16.0"
