@@ -39,6 +39,12 @@ services:
       - ../../mfe/Freetext/src:/app/src
       - ../../mfe/Freetext/rsbuild.config.ts:/app/rsbuild.config.ts
 
+  chat_server:
+    build:
+      context: ../../services/chat_server/
+    ports:
+      - 3100:8080
+
   ingress:
     image: nginx
     volumes:
