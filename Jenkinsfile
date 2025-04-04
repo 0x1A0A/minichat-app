@@ -5,13 +5,13 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
-	container:
-	- name: node
-	  image: node:20-slim
-	  command:
-	  	- "sleep"
-	  args:
-	  	- "infinity"
+    container:
+    - name: node
+      image: node:20-slim
+      command:
+        - "sleep"
+      args:
+        - "infinity"
 '''
 			defaultContainer 'node'
 		}
