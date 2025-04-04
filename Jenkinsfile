@@ -20,12 +20,10 @@ spec:
 	stages {
 		stage('test') {
 			steps {
-				container('node') {
-					sh 'corepack enable'
-					sh 'cd mfe/Freetext'
-					sh 'yes | pnpm install'
-					sh 'pnpm test'
-				}
+                sh 'corepack enable'
+                sh 'cd mfe/Freetext'
+                sh 'yes | pnpm install'
+                sh 'pnpm test'
 			}
 		}
 	}
