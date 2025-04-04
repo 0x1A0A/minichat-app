@@ -20,7 +20,7 @@ spec:
 	stages {
 		stage('test') {
 			steps {
-				dir('mfe/Freetext') {
+				dir('mfe/Chat') {
 					sh 'corepack enable'
 					sh 'yes | pnpm install'
 					sh 'pnpm test'
