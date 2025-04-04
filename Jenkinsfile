@@ -1,12 +1,18 @@
 pipeline {
 	agent {
 		kubernetes {
-			containerTemplate {
-				name 'node'
-				image 'node:20-slim'
-				command 'sleep'
-				args 'infinity'
-			}
+		yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+	container:
+	- name: node
+	  image: node:20-slim
+	  command:
+	  	- "sleep"
+	  args:
+	  	- "infinity"
+'''
 			defaultContainer 'node'
 		}
 	}
@@ -15,8 +21,10 @@ pipeline {
 		stage('test') {
 			steps {
 				container('node') {
-					sh 'ls'
-					sh 'node -v'
+					sh 'corepack enable'
+					sh 'cd mfe/Freetext'
+					sh 'yes | pnpm install'
+					sh 'pnpm test'
 				}
 			}
 		}
