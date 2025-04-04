@@ -1,17 +1,17 @@
 pipeline {
 	agent {
 		kubernetes {
-		yaml '''
+			yaml '''
 apiVersion: v1
 kind: Pod
 spec:
-    container:
+    containers:
     - name: node
       image: node:20-slim
       command:
-        - "sleep"
+        - sleep
       args:
-        - "infinity"
+        - infinity
 '''
 			defaultContainer 'node'
 		}
