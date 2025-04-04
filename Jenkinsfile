@@ -14,9 +14,10 @@ pipeline {
 	stages {
 		stage('test') {
 			steps {
-				container('node') [
+				container('node') {
 					sh 'ls'
 					sh 'node -v'
+				}
 			}
 		}
 	}
